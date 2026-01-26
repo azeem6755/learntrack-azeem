@@ -11,9 +11,9 @@ public class Main {
         Student s2 = new Student("Mariya", "Shaikh", "mariya@gmail.com", "C-18");
         Enrollment e2 = new Enrollment(s2.getId(), c1.getId());
         c1.display();
-        s1.displayStudent();
+        s1.display();
         e1.display();
-        s2.displayStudent();
+        s2.display();
         e2.display();
     }
 }
