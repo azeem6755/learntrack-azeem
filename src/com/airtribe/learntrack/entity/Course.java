@@ -58,7 +58,7 @@ public class Course {
         System.out.printf("Name: %s\n", this.courseName);
         System.out.printf("Description: %s\n", this.description);
         System.out.printf("Duration in weeks: %d\n", this.durationInWeeks);
-        System.out.printf("Status: %b\n", this.active);
+        System.out.printf("Status: %b\n\n", this.active);
     }
 
 }
