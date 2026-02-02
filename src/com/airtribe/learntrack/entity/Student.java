@@ -1,22 +1,22 @@
 package com.airtribe.learntrack.entity;
+import com.airtribe.learntrack.util.IdGenerator;
 
 public class Student extends Person{
     private final int id;
     private String batch;
     private boolean active;
 
-    private static int counter=0;
 
     public Student(String firstName, String lastName, String email, String batch) {
         super(firstName, lastName, email);
-        this.id = ++counter;
+        this.id = IdGenerator.getNextStudentId();
         setBatch(batch);
         setStatus(true);
     }
 
     public Student(String firstName, String lastName, String batch) {
         super(firstName, lastName);
-        this.id = ++counter;
+        this.id = IdGenerator.getNextStudentId();
         setBatch(batch);
         setStatus(true);
     }
@@ -45,8 +45,8 @@ public class Student extends Person{
         this.active = status;
     }
 
+    @Override
     public void display() {
-        System.out.println("CHILD");
         System.out.printf("ID: %d\n", this.id);
         super.display();
         System.out.printf("Batch: %s\n", this.batch);

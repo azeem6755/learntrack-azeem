@@ -42,7 +42,6 @@ public class Person {
     }
 
     public void display() {
-        System.out.println("Parent class");
         System.out.printf("Name: %s\n", this.getName());
         System.out.printf("Email: %s\n", this.email);
     }

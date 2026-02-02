@@ -1,4 +1,5 @@
 package com.airtribe.learntrack.entity;
+import com.airtribe.learntrack.util.IdGenerator;
 
 public class Course {
     private final int id;
@@ -10,7 +11,7 @@ public class Course {
     private static int counter=0;
 
     public Course(String courseName, String description, int durationInWeeks) {
-        this.id = ++counter;
+        this.id = IdGenerator.getNextCourseId();
         setCourseName(courseName);
         setDescription(description);
         setDuration(durationInWeeks);
