@@ -8,8 +8,6 @@ public class Course {
     private int durationInWeeks;
     private boolean active=false;
 
-    private static int counter=0;
-
     public Course(String courseName, String description, int durationInWeeks) {
         this.id = IdGenerator.getNextCourseId();
         setCourseName(courseName);
@@ -56,10 +54,10 @@ public class Course {
 
     public void display() {
         System.out.printf("ID: %d\n", this.id);
-        System.out.printf("Name: %s\n", this.courseName);
-        System.out.printf("Description: %s\n", this.description);
-        System.out.printf("Duration in weeks: %d\n", this.durationInWeeks);
-        System.out.printf("Status: %b\n\n", this.active);
+        System.out.printf("Name: %s\n", this.getCourseName());
+        System.out.printf("Description: %s\n", this.getDescription());
+        System.out.printf("Duration in weeks: %d\n", this.getDuration());
+        System.out.printf("Status: %b\n\n", this.getActive());
     }
 
 }
