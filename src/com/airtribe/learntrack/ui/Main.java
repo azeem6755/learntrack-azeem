@@ -9,10 +9,12 @@ public class Main {
     public static void main(String[] args) {
         boolean exitFlag = false;
         Scanner scanner = new Scanner(System.in);
+        System.out.println("WELCOME!");
 
         while(!exitFlag) {
-            System.out.println("Welcome!\n 1. Add Student 2. Add Course 3. List Students" +
-                    " 4. List Courses 5. Create Enrollment 6. Remove Student 7. Remove Course 8. Exit");
+            System.out.println("1. Add Student 2. List Students 3. Search Student 4. Deactivate Student 5. Remove Student" +
+                    " 6. Add Course 7. List Courses 8. Activate/Deactivate Course 9. Enroll Student  10. View Enrollments" +
+                    " 11. Change Enrollment Status 12. Exit");
             int choice = scanner.nextInt();
 
             switch (choice) {
@@ -20,21 +22,52 @@ public class Main {
                     Service.addStudent();
                     break;
                 case 2:
-                    Service.addCourse();
-                    break;
-                case 3:
                     Service.listStudents();
                     break;
+                case 3:
+                    System.out.print("Enter Student ID: ");
+                    int studentId = scanner.nextInt();
+                    Service.searchStudentId(studentId);
+                    break;
                 case 4:
+                    System.out.print("Enter Student ID: ");
+                    studentId = scanner.nextInt();
+                    Service.deactivateStudent(studentId);
                     break;
                 case 5:
+                    System.out.print("Enter Student ID: ");
+                    studentId = scanner.nextInt();
+                    Service.removeStudent(studentId);
                     break;
                 case 6:
-                    Service.removeStudent();
+                    Service.addCourse();
                     break;
                 case 7:
+                    Service.listCourses();
                     break;
                 case 8:
+                    System.out.print("Enter Course ID: ");
+                    int courseId = scanner.nextInt();
+                    Service.changeCourseStatus(courseId);
+                    break;
+                case 9:
+                    System.out.print("Enter Student ID: ");
+                    studentId = scanner.nextInt();
+                    System.out.print("Enter Course ID: ");
+                    courseId = scanner.nextInt();
+                    Service.enrollStudent(studentId, courseId);
+                    break;
+                case 10:
+                    System.out.print("Enter Student ID: ");
+                    studentId = scanner.nextInt();
+                    Service.viewEnrollment(studentId);
+                    break;
+                case 11:
+                    System.out.print("Enter Student ID: ");
+                    studentId = scanner.nextInt();
+                    Service.changeEnrollmentStatus(studentId);
+                    break;
+                case 12:
                     System.out.println("Bye!!!");
                     exitFlag = true;
                     break;

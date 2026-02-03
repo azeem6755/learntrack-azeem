@@ -53,11 +53,15 @@ public class Course {
     }
 
     public void display() {
-        System.out.printf("ID: %d\n", this.id);
+        System.out.printf("ID: %d\n", this.getId());
         System.out.printf("Name: %s\n", this.getCourseName());
         System.out.printf("Description: %s\n", this.getDescription());
         System.out.printf("Duration in weeks: %d\n", this.getDuration());
         System.out.printf("Status: %b\n\n", this.getActive());
+    }
+
+    public void displayId() {
+        System.out.printf("ID: %d; Name: %s", this.getId(), this.getCourseName());
     }
 
 }

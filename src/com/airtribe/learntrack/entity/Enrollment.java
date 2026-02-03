@@ -7,7 +7,7 @@ public class Enrollment {
     private final int id;
     private int studentId;
     private int courseId;
-    private LocalDate enrollmentDate;
+    private final LocalDate enrollmentDate;
     private EnrollmentStatus status;
 
     private static int counter = 0;
@@ -16,7 +16,7 @@ public class Enrollment {
         this.id = ++counter;
         setStudentId(studentId);
         setCourseId(courseId);
-        this.status = EnrollmentStatus.ACTIVE;
+        setEnrollmentStatus(EnrollmentStatus.ACTIVE);
         this.enrollmentDate = LocalDate.now();
         
     }
@@ -49,12 +49,14 @@ public class Enrollment {
         this.courseId = courseId;
     }
 
+    public void setEnrollmentStatus(EnrollmentStatus status) {
+        this.status = status;
+    }
+
     public void display() {
-        System.out.printf("ID: %d\n", this.id);
-        System.out.printf("Student ID: %d\n", this.studentId);
-        System.out.printf("Course ID: %d\n", courseId);
-        System.out.println("Enrollment Date: " + this.enrollmentDate);
-        System.out.printf("Status: %s\n\n", this.status.name());
+        System.out.printf("ID: %d\n", this.getId());
+        System.out.println("Enrollment Date: " + this.getEnrollmentDate());
+        System.out.printf("Status: %s\n\n", this.getStatus());
     }
     
 }

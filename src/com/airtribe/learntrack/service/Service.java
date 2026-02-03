@@ -1,11 +1,13 @@
 package com.airtribe.learntrack.service;
 
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.Scanner;
 
 import com.airtribe.learntrack.entity.Student;
 import com.airtribe.learntrack.entity.Course;
 import com.airtribe.learntrack.entity.Enrollment;
+import com.airtribe.learntrack.util.EnrollmentStatus;
 
 public class Service {
     private static ArrayList<Student> studentList = new ArrayList<>();
@@ -39,14 +41,45 @@ public class Service {
 
     public static void listStudents() {
         for (Student student : studentList) {
-            student.display();
+            student.displayID();
         }
     }
 
-    public static void removeStudent() {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter Studnent ID: ");
-        int studentId = sc.nextInt();
+    public static Student searchStudent(int studentId) {
+        Optional<Student> matchingStudent = studentList.stream().filter(student -> student.getId() == studentId).
+                findFirst();
+        if (matchingStudent.isPresent()) {
+            Student student = matchingStudent.get();
+            return student;
+        }
+        else {
+            return null;
+        }
+    }
+
+    public static void searchStudentId(int studentId) {
+        Student student = searchStudent(studentId);
+        if (student != null) {
+            student.display();
+        }
+        else {
+            System.out.println("Student not found.");
+        }
+    }
+
+    public static void deactivateStudent(int studentId) {
+        Optional<Student> matchingStudent = studentList.stream().filter(student -> student.getId() == studentId).
+                findFirst();
+        if (matchingStudent.isPresent()) {
+            Student student = matchingStudent.get();
+            student.setStatus(false);
+        }
+        else {
+            System.out.println("Student not found.");
+        }
+    }
+
+    public static void removeStudent(int studentId) {
         studentList.removeIf(obj -> obj.getId() == studentId);
         System.out.printf("Removed student id: %d\n", studentId);
         listStudents();
@@ -66,6 +99,83 @@ public class Service {
         Course course = new Course(courseName, description, duration);
         courseList.add(course);
         System.out.printf("Added course with id: %d\n", course.getId());
+    }
+
+    public static void listCourses() {
+        for (Course course: courseList) {
+            course.displayId();
+        }
+    }
+
+    public static Course searchCourse(int courseId) {
+        Optional<Course> matchingCourse = courseList.stream().filter(course -> course.getId() == courseId).findFirst();
+        if (matchingCourse.isPresent()) {
+            return matchingCourse.get();
+        }
+        else {
+            return null;
+        }
+    }
+
+    public static void changeCourseStatus(int courseId) {
+        Course course = searchCourse(courseId);
+        if (course != null) {
+            course.setActiveStatus(!course.getActive());
+            System.out.println("Course status changed for " + courseId + "\n");
+        }
+        else {
+            System.out.println("Course not found.\n");
+        }
+    }
+
+    public static void enrollStudent(int studentId, int courseId) {
+        Enrollment enrollment = new Enrollment(studentId, courseId);
+        enrollments.add(enrollment);
+        System.out.printf("Enrollment created for student: %d with ID: %d\n", studentId, enrollment.getId());
+    }
+
+    public static void viewEnrollment(int studentId) {
+        Optional<Enrollment> matchingEnrollment = enrollments.stream().filter(
+                enrollment -> enrollment.getStudentId() == studentId).findFirst();
+        if (matchingEnrollment.isPresent()) {
+            Enrollment enrollment = matchingEnrollment.get();
+            Student student = searchStudent(studentId);
+            Course course = searchCourse(enrollment.getcourseId());
+            if (course != null && student != null){
+                System.out.printf("Student Name: %s\n", student.getName());
+                System.out.printf("Course Name: %s\n", course.getCourseName());
+                enrollment.display();
+            }
+        }
+        else {
+            System.out.println("Enrollment not found.\n");
+        }
+    }
+
+    public static void changeEnrollmentStatus(int studentId) {
+        Optional<Enrollment> matchingEnrollment = enrollments.stream().filter(
+                enrollment -> enrollment.getStudentId() == studentId).findFirst();
+        if (matchingEnrollment.isPresent()) {
+            Enrollment enrollment = matchingEnrollment.get();
+            Scanner sc = new Scanner(System.in);
+            System.out.println("1. Mark Complete, 2. Cancel Enrollment");
+            System.out.print("Enter Choice: ");
+            int choice = sc.nextInt();
+            switch (choice) {
+                case 1:
+                    enrollment.setEnrollmentStatus(EnrollmentStatus.COMPLETED);
+                    break;
+                case 2:
+                    enrollment.setEnrollmentStatus(EnrollmentStatus.CANCELLED);
+                    break;
+                default:
+                    System.out.println("Invalid Choice.\n");
+            }
+            System.out.println("Enrollment status changed.\n");
+        }
+        else {
+            System.out.println("Student Enrollment not found.\n");
+        }
     }
 
 }

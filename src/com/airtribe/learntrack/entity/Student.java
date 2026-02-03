@@ -52,4 +52,8 @@ public class Student extends Person{
         System.out.printf("Batch: %s\n", this.batch);
         System.out.printf("Active: %b\n\n", this.active);
     }
+
+    public void displayID() {
+        System.out.printf("ID: %d; Name: %s\n", this.id, super.getName());
+    }
 }
