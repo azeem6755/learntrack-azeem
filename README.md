@@ -1,6 +1,5 @@
 ## Getting Started
-
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+This is learntrack, a one stop learning platform where you can create students and courses, enroll students to these courses, and complete the courses.
 
 ## Folder Structure
 
@@ -11,8 +10,16 @@ The workspace contains two folders by default, where:
 
 Meanwhile, the compiled output files will be generated in the `bin` folder by default.
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
 
-## Dependency Management
+### Packages
+Main Package - `com.airtribe.learntrack`
+Sub Packages -
+- `docs` - This package contains the documentation for the project.
+- `entity` - Contains entity classes eg - Person, Student, Course, Enrollment
+- `exception` - Contains custom exception classes
+- `service` - Contains all the service methods. Methods include - addStudent, listStudents, viewStudent, addCourse, listCourse, enrollStudent, viewEnrollments, etc.
+- `ui` - Contains the main runnable class
+- `util` - Contains utility classes like IdGenerator and enums.
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+## Class Diagram - 
+![learntrackclass.png](learntrackclass.png)
