@@ -8,6 +8,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         boolean exitFlag = false;
+        int studentId;
+        int courseId;
         Scanner scanner = new Scanner(System.in);
         System.out.println("WELCOME!");
 
@@ -26,7 +28,7 @@ public class Main {
                     break;
                 case 3:
                     System.out.print("Enter Student ID: ");
-                    int studentId = scanner.nextInt();
+                    studentId = scanner.nextInt();
                     Service.searchStudentId(studentId);
                     break;
                 case 4:
@@ -47,7 +49,7 @@ public class Main {
                     break;
                 case 8:
                     System.out.print("Enter Course ID: ");
-                    int courseId = scanner.nextInt();
+                    courseId = scanner.nextInt();
                     Service.changeCourseStatus(courseId);
                     break;
                 case 9:
