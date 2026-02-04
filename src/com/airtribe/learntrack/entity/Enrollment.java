@@ -2,6 +2,7 @@ package com.airtribe.learntrack.entity;
 import java.time.LocalDate;
 
 import com.airtribe.learntrack.util.EnrollmentStatus;
+import com.airtribe.learntrack.util.IdGenerator;
 
 public class Enrollment {
     private final int id;
@@ -10,10 +11,8 @@ public class Enrollment {
     private final LocalDate enrollmentDate;
     private EnrollmentStatus status;
 
-    private static int counter = 0;
-
     public Enrollment(int studentId, int courseId) {
-        this.id = ++counter;
+        this.id = IdGenerator.getNextEnrollmentId();
         setStudentId(studentId);
         setCourseId(courseId);
         setEnrollmentStatus(EnrollmentStatus.ACTIVE);
