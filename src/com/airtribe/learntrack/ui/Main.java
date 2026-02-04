@@ -1,6 +1,8 @@
 package com.airtribe.learntrack.ui;
 
 import com.airtribe.learntrack.entity.*;
+import com.airtribe.learntrack.exception.EntityNotFoundException;
+import com.airtribe.learntrack.exception.InvalidInputException;
 import com.airtribe.learntrack.service.Service;
 
 import java.util.Scanner;
@@ -21,7 +23,12 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    Service.addStudent();
+                    try{
+                        Service.addStudent();
+                    }
+                    catch (InvalidInputException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 2:
                     Service.listStudents();
@@ -29,20 +36,40 @@ public class Main {
                 case 3:
                     System.out.print("Enter Student ID: ");
                     studentId = scanner.nextInt();
-                    Service.searchStudentId(studentId);
+                    try {
+                        Service.searchStudentId(studentId);
+                    }
+                    catch (EntityNotFoundException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 4:
                     System.out.print("Enter Student ID: ");
                     studentId = scanner.nextInt();
-                    Service.deactivateStudent(studentId);
+                    try{
+                        Service.deactivateStudent(studentId);
+                    }
+                    catch(EntityNotFoundException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 5:
                     System.out.print("Enter Student ID: ");
                     studentId = scanner.nextInt();
-                    Service.removeStudent(studentId);
+                    try{
+                        Service.removeStudent(studentId);
+                    }
+                    catch (EntityNotFoundException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 6:
-                    Service.addCourse();
+                    try {
+                        Service.addCourse();
+                    }
+                    catch (InvalidInputException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 7:
                     Service.listCourses();
@@ -50,7 +77,12 @@ public class Main {
                 case 8:
                     System.out.print("Enter Course ID: ");
                     courseId = scanner.nextInt();
-                    Service.changeCourseStatus(courseId);
+                    try {
+                        Service.changeCourseStatus(courseId);
+                    }
+                    catch (EntityNotFoundException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 9:
                     System.out.print("Enter Student ID: ");
@@ -62,14 +94,24 @@ public class Main {
                 case 10:
                     System.out.print("Enter Student ID: ");
                     studentId = scanner.nextInt();
-                    Service.viewEnrollments(studentId);
+                    try {
+                        Service.viewEnrollments(studentId);
+                    }
+                    catch (EntityNotFoundException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 11:
                     System.out.print("Enter Student ID: ");
                     studentId = scanner.nextInt();
                     System.out.print("Enter Course ID: ");
                     courseId = scanner.nextInt();
-                    Service.changeEnrollmentStatus(studentId, courseId);
+                    try {
+                        Service.changeEnrollmentStatus(studentId, courseId);
+                    }
+                    catch (EntityNotFoundException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 12:
                     System.out.println("Bye!!!");

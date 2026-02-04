@@ -1,4 +1,5 @@
 package com.airtribe.learntrack.entity;
+import com.airtribe.learntrack.exception.InvalidInputException;
 import com.airtribe.learntrack.util.IdGenerator;
 
 public class Student extends Person{
@@ -7,14 +8,14 @@ public class Student extends Person{
     private boolean active;
 
 
-    public Student(String firstName, String lastName, String email, String batch) {
+    public Student(String firstName, String lastName, String email, String batch) throws InvalidInputException {
         super(firstName, lastName, email);
         this.id = IdGenerator.getNextStudentId();
         setBatch(batch);
         setStatus(true);
     }
 
-    public Student(String firstName, String lastName, String batch) {
+    public Student(String firstName, String lastName, String batch) throws InvalidInputException {
         super(firstName, lastName);
         this.id = IdGenerator.getNextStudentId();
         setBatch(batch);
