@@ -1,8 +1,7 @@
 package com.airtribe.learntrack.service;
 
-import java.util.ArrayList;
-import java.util.Optional;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import com.airtribe.learntrack.entity.Student;
 import com.airtribe.learntrack.entity.Course;
@@ -134,17 +133,18 @@ public class Service {
         System.out.printf("Enrollment created for student: %d with ID: %d\n", studentId, enrollment.getId());
     }
 
-    public static void viewEnrollment(int studentId) {
-        Optional<Enrollment> matchingEnrollment = enrollments.stream().filter(
-                enrollment -> enrollment.getStudentId() == studentId).findFirst();
-        if (matchingEnrollment.isPresent()) {
-            Enrollment enrollment = matchingEnrollment.get();
-            Student student = searchStudent(studentId);
-            Course course = searchCourse(enrollment.getcourseId());
-            if (course != null && student != null){
-                System.out.printf("Student Name: %s\n", student.getName());
-                System.out.printf("Course Name: %s\n", course.getCourseName());
-                enrollment.display();
+    public static void viewEnrollments(int studentId) {
+        List<Enrollment> matchingEnrollment = enrollments.stream().filter(
+                enrollment -> enrollment.getStudentId() == studentId).toList();
+        if (!matchingEnrollment.isEmpty()) {
+            for (Enrollment enrollment: matchingEnrollment) {
+                Student student = searchStudent(studentId);
+                Course course = searchCourse(enrollment.getcourseId());
+                if (course != null && student != null){
+                    System.out.printf("Student Name: %s\n", student.getName());
+                    System.out.printf("Course Name: %s\n", course.getCourseName());
+                    enrollment.display();
+                }
             }
         }
         else {
@@ -152,9 +152,9 @@ public class Service {
         }
     }
 
-    public static void changeEnrollmentStatus(int studentId) {
+    public static void changeEnrollmentStatus(int studentId, int courseId) {
         Optional<Enrollment> matchingEnrollment = enrollments.stream().filter(
-                enrollment -> enrollment.getStudentId() == studentId).findFirst();
+                enrollment -> enrollment.getStudentId() == studentId && enrollment.getcourseId() == courseId).findFirst();
         if (matchingEnrollment.isPresent()) {
             Enrollment enrollment = matchingEnrollment.get();
             Scanner sc = new Scanner(System.in);

@@ -60,12 +60,14 @@ public class Main {
                 case 10:
                     System.out.print("Enter Student ID: ");
                     studentId = scanner.nextInt();
-                    Service.viewEnrollment(studentId);
+                    Service.viewEnrollments(studentId);
                     break;
                 case 11:
                     System.out.print("Enter Student ID: ");
                     studentId = scanner.nextInt();
-                    Service.changeEnrollmentStatus(studentId);
+                    System.out.print("Enter Course ID: ");
+                    courseId = scanner.nextInt();
+                    Service.changeEnrollmentStatus(studentId, courseId);
                     break;
                 case 12:
                     System.out.println("Bye!!!");
